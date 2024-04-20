@@ -1,0 +1,3 @@
+class Apifech {
+  void printapi() {}
+}
