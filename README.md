@@ -1,6 +1,6 @@
 # meshinavi
 
-A new Flutter project.
+現在地付近のレストランを検索するスマホアプリ
 
 ## Getting Started
 
