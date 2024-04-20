@@ -18,6 +18,7 @@ class Apifech {
 
     final jsonData = utf8.decode(response.bodyBytes);
     final jsonData_text = json.decode(jsonData);
+    print(response.statusCode);
     print(jsonData_text);
 
     // if (response.statusCode == 200) {
