@@ -1,3 +1,5 @@
+// 詳細画面
+
 import 'package:flutter/material.dart';
 import 'package:meshinavi/settingcolor.dart';
 
