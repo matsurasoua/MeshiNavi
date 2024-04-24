@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:meshinavi/api_fetch.dart';
+import 'package:meshinavi/result.dart';
 import 'package:meshinavi/settingcolor.dart';
 
 Future<void> main() async {
@@ -31,7 +32,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(Setting_Color.setting_background),
+      backgroundColor: Colors.white,
       body: Column(
         children: [
           Container(
@@ -46,14 +47,27 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
+          Container(
+            width: 220,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(Setting_Color.setting_brown),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10) //こちらを適用
+                    ),
+              ),
+              child: const Text('検索'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ResultPage(),
+                      fullscreenDialog: true),
+                );
+              },
+            ),
+          )
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          print(dotenv.get('API_KEY'));
-          // 現在地取得して検索
-          Apifech().printapi(34.38666, 135.37279, 5);
-        },
       ),
     );
   }
