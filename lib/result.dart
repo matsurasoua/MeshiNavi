@@ -1,3 +1,5 @@
+//検索結果表示
+
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:meshinavi/api_fetch.dart';
@@ -6,8 +8,9 @@ import 'package:meshinavi/settingcolor.dart';
 // ignore_for_file: prefer_const_constructors
 
 class ResultPage extends StatefulWidget {
-  const ResultPage({super.key});
-
+  const ResultPage({super.key, required this.lat, required this.lng});
+  final double lat;
+  final double lng;
   @override
   State<ResultPage> createState() => _ResultPageState();
 }
@@ -15,6 +18,9 @@ class ResultPage extends StatefulWidget {
 class _ResultPageState extends State<ResultPage> {
   @override
   Widget build(BuildContext context) {
+    double lat = widget.lat;
+    double lng = widget.lng;
+    print('lat:$lat,lng:$lng');
     return Scaffold(
       backgroundColor: const Color.fromARGB(250, 255, 255, 255),
       appBar: AppBar(
@@ -63,7 +69,7 @@ class _ResultPageState extends State<ResultPage> {
             ),
           ]),
       body: FutureBuilder(
-          future: Apifech().printapi(35.6493601, 139.6732812, 5, 7),
+          future: Apifech().printapi(lat, lng, 5, 7),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               final infos = snapshot.data;
@@ -227,7 +233,7 @@ class _ResultPageState extends State<ResultPage> {
                     },
                     // 最後までスクロールした時に被らないようにmargin
                     Container(
-                      margin: EdgeInsets.only(top: 110),
+                      margin: EdgeInsets.only(top: 120),
                     ),
                   ],
                 ),
@@ -255,7 +261,6 @@ class _BottomSheet extends StatelessWidget {
           topRight: Radius.circular(10),
         ),
       ),
-      margin: EdgeInsets.only(top: 80),
     );
   }
 }
