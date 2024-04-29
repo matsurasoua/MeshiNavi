@@ -39,10 +39,20 @@ dependencies:
   geolocator: ^11.0.0
   http: ^1.1.0
   flutter_speed_dial: ^7.0.0
+  pagination_flutter: ^0.0.8
+  flutter_map: ^6.1.0
+  latlong2: ^0.9.1
+  url_launcher: ^6.2.4
+  flutter_hooks:
+  flutter_riverpod:
+  riverpod_annotation:
 
 dev_dependencies:
+  build_runner:
+  riverpod_generator:
   flutter_test:
     sdk: flutter
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -65,6 +75,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - .env
+    - assets/map.png
     
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
