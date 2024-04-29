@@ -1,8 +1,8 @@
 // メイン画面
 
-// ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:meshinavi/currentlocation.dart';
 import 'package:meshinavi/result.dart';
@@ -10,7 +10,9 @@ import 'package:meshinavi/settingcolor.dart';
 
 Future<void> main() async {
   await dotenv.load(fileName: '.env');
-  runApp(const MyApp());
+  const app = MyApp();
+  const scope = ProviderScope(child: app);
+  runApp(scope);
 }
 
 class MyApp extends StatelessWidget {
@@ -33,12 +35,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 // ECCの緯度経度
-  double lat2 = 34.706388;
-  double lng2 = 135.5010759;
+  // double lat2 = 34.706388;
+  // double lng2 = 135.5010759;
+  double lat2 = 34.3854287;
+  double lng2 = 135.3721289;
 
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(Setting_Color.setting_background),
       body: Column(
         children: [
           Container(
