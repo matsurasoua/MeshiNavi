@@ -14,10 +14,10 @@ class Apifech {
   // ジャンル取得
   String url_genre = dotenv.get('GENRE_API');
 
-  Stream<dynamic> printapi(
-      double lat, double lng, int range, int count) async* {
+  Stream<dynamic> printapi(double lat, double lng, int count, int range,
+      String budgetcode, String genreCode) async* {
     url =
-        '$url?key=$key&lat=$lat&lng=$lng&range=$range&count=$count&format=json';
+        '$url?key=$key&lat=$lat&lng=$lng&count=$count&range=$range&budget=$budgetcode&genre=$genreCode&format=json';
     print(url);
     final response = await http.get(
       Uri.parse(url),
@@ -37,7 +37,7 @@ class Apifech {
     }
   }
 
-// ジャンルと値段取得s
+// ジャンルと値段取得
   Future<List> Api_list() async {
     final response_budget = await http.get(
       Uri.parse(url_budget),

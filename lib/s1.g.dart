@@ -6,7 +6,7 @@ part of 's1.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$s1NotifierHash() => r'553e9674ff56601e6da954023f099a94b7e4672b';
+String _$s1NotifierHash() => r'fa6c1419f8f21a4b80e76d515e2fcb171bee5e3a';
 
 /// See also [S1Notifier].
 @ProviderFor(S1Notifier)
@@ -21,7 +21,7 @@ final s1NotifierProvider =
 );
 
 typedef _$S1Notifier = AutoDisposeNotifier<int>;
-String _$s2NotifierHash() => r'dc03a65b6cb8960644a9be131649e9e3a8830368';
+String _$s2NotifierHash() => r'52350a9a42dcadf7967ccad05c735ee65838dde6';
 
 /// See also [S2Notifier].
 @ProviderFor(S2Notifier)
@@ -36,5 +36,65 @@ final s2NotifierProvider =
 );
 
 typedef _$S2Notifier = AutoDisposeNotifier<int>;
+String _$s3NotifierHash() => r'7e0c7c0e51847ee87a78a037bccf5b2139fc65b3';
+
+/// See also [S3Notifier].
+@ProviderFor(S3Notifier)
+final s3NotifierProvider =
+    AutoDisposeNotifierProvider<S3Notifier, String>.internal(
+  S3Notifier.new,
+  name: r's3NotifierProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$s3NotifierHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$S3Notifier = AutoDisposeNotifier<String>;
+String _$s4NotifierHash() => r'8cbe54f93b6667ef95e228fa94bf5017926236ed';
+
+/// See also [S4Notifier].
+@ProviderFor(S4Notifier)
+final s4NotifierProvider =
+    AutoDisposeNotifierProvider<S4Notifier, String>.internal(
+  S4Notifier.new,
+  name: r's4NotifierProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$s4NotifierHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$S4Notifier = AutoDisposeNotifier<String>;
+String _$s5NotifierHash() => r'821ca3e8c669ccb510667bb93423e4423a59c443';
+
+/// See also [S5Notifier].
+@ProviderFor(S5Notifier)
+final s5NotifierProvider =
+    AutoDisposeNotifierProvider<S5Notifier, String>.internal(
+  S5Notifier.new,
+  name: r's5NotifierProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$s5NotifierHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$S5Notifier = AutoDisposeNotifier<String>;
+String _$s6NotifierHash() => r'58ee46d114b434eadb20a38d436ae7c546b6b83b';
+
+/// See also [S6Notifier].
+@ProviderFor(S6Notifier)
+final s6NotifierProvider =
+    AutoDisposeNotifierProvider<S6Notifier, String>.internal(
+  S6Notifier.new,
+  name: r's6NotifierProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$s6NotifierHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$S6Notifier = AutoDisposeNotifier<String>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

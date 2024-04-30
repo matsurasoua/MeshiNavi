@@ -12,10 +12,19 @@ class ResultPage extends ConsumerWidget {
   final double lng;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // 状態管理をしている値を取得するプロパティ(デフォは１)
+    // 状態管理(範囲　デフォは3)
     final s1 = ref.watch(s1NotifierProvider);
+    // 状態管理(ラジオボタン　デフォは3)
+    final s2 = ref.watch(s2NotifierProvider);
+    // 状態管理(値段　デフォは'')
+    final s3 = ref.watch(s3NotifierProvider);
+    // 状態管理(ジャンル　デフォは'')
+    final s4 = ref.watch(s4NotifierProvider);
+    // 状態管理(ジャンル　デフォは'')
+    final s5 = ref.watch(s5NotifierProvider);
+    // 状態管理(ジャンル　デフォは'')
+    final s6 = ref.watch(s6NotifierProvider);
     print('s1:$s1');
-
     print('lat:$lat,lng:$lng');
     return Scaffold(
       backgroundColor: Color(Setting_Color.setting_background),
@@ -51,7 +60,7 @@ class ResultPage extends ConsumerWidget {
         ),
       ),
       body: StreamBuilder(
-          stream: Apifech().printapi(lat, lng, s1, 100),
+          stream: Apifech().printapi(lat, lng, 10, s1, s3, s5),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.waiting:
@@ -105,7 +114,6 @@ class ResultPage extends ConsumerWidget {
                   budget.add(infos['results']['shop'][i]['budget']['name']);
                   access.add(infos['results']['shop'][i]['mobile_access']);
                 }
-                print(names);
 
                 return SingleChildScrollView(
                   child: Column(
@@ -259,9 +267,35 @@ class _BottomSheet extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // s2には状態管理している値が入っている
+    final s1 = ref.watch(s1NotifierProvider);
+    // s2には状態管理している値が入っている
     final s2 = ref.watch(s2NotifierProvider);
-    print('s2:$s2');
-    final _intValue = ref.watch(s2NotifierProvider.notifier);
+    // s3には状態管理している値が入っている
+    final s3 = ref.watch(s3NotifierProvider);
+    // s4には状態管理している値が入っている
+    final s4 = ref.watch(s4NotifierProvider);
+    // s4には状態管理している値が入っている
+    final s5 = ref.watch(s5NotifierProvider);
+    // s4には状態管理している値が入っている
+    final s6 = ref.watch(s6NotifierProvider);
+
+    // ラジオボタン
+    final Value2 = ref.watch(s2NotifierProvider.notifier);
+    // 値段
+    final Value3 = ref.watch(s3NotifierProvider.notifier);
+    // 値段
+    final Value4 = ref.watch(s4NotifierProvider.notifier);
+    // ジャンル
+    final Value5 = ref.watch(s5NotifierProvider.notifier);
+    // ジャンル
+    final Value6 = ref.watch(s6NotifierProvider.notifier);
+    print('*********');
+    print('s1range:$s1');
+    print('s2range:$s2');
+    print('s3budget:$s3');
+    print('s4budget:$s4');
+    print('s5genre:$s5');
+    print('s6genre:$s6');
 
     return FutureBuilder(
       future: Apifech().Api_list(),
@@ -272,7 +306,6 @@ class _BottomSheet extends ConsumerWidget {
           dynamic budget = infos?[0];
           // ジャンル情報
           dynamic genre = infos?[1];
-          print(genre);
           // 金額個数
           int budget_length = budget.length;
           int genre_length = genre.length;
@@ -338,7 +371,9 @@ class _BottomSheet extends ConsumerWidget {
                                     ),
                                   ),
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  Value4.state = budget[i]['code'];
+                                },
                               ),
                             ),
                           },
@@ -346,12 +381,14 @@ class _BottomSheet extends ConsumerWidget {
                       ),
                     ),
                   ),
+
+                  // 距離
                   Container(
                     margin: EdgeInsets.only(left: 15, top: 10),
                     child: Align(
                       alignment: Alignment.topLeft,
                       child: Text(
-                        '距離',
+                        '距離(デフォルトは1000m)',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 20),
                       ),
@@ -367,7 +404,7 @@ class _BottomSheet extends ConsumerWidget {
                               value: 1,
                               groupValue: s2, // 状態を表示する.
                               onChanged: (value) {
-                                _intValue.state = value!; // 状態を操作する.
+                                Value2.state = value!; // 状態を操作する.
                               },
                             ),
                             Text('300m'),
@@ -375,7 +412,7 @@ class _BottomSheet extends ConsumerWidget {
                               value: 2,
                               groupValue: s2, // 状態を表示する.
                               onChanged: (value) {
-                                _intValue.state = value!; // 状態を操作する.
+                                Value2.state = value!; // 状態を操作する.
                               },
                             ),
                             Text('500m'),
@@ -383,7 +420,7 @@ class _BottomSheet extends ConsumerWidget {
                               value: 3,
                               groupValue: s2, // 状態を表示する.
                               onChanged: (value) {
-                                _intValue.state = value!; // 状態を操作する.
+                                Value2.state = value!; // 状態を操作する.
                               },
                             ),
                             Text('1000m'),
@@ -395,7 +432,7 @@ class _BottomSheet extends ConsumerWidget {
                               value: 4,
                               groupValue: s2, // 状態を表示する.
                               onChanged: (value) {
-                                _intValue.state = value!; // 状態を操作する.
+                                Value2.state = value!; // 状態を操作する.
                               },
                             ),
                             Text('2000m'),
@@ -403,7 +440,7 @@ class _BottomSheet extends ConsumerWidget {
                                 value: 5,
                                 groupValue: s2,
                                 onChanged: (value) {
-                                  _intValue.state = value!;
+                                  Value2.state = value!;
                                 }),
                             Text('3000m'),
                           ],
@@ -440,21 +477,26 @@ class _BottomSheet extends ConsumerWidget {
                       children: List.generate(
                         genre_length,
                         (index) {
-                          return Container(
-                            child: Center(
-                              child: Text(
-                                genre[index]['name'],
-                                style: TextStyle(fontSize: 13),
+                          return GestureDetector(
+                            onTap: () async {
+                              Value6.state = genre[index]['code'];
+                            },
+                            child: Container(
+                              child: Center(
+                                child: Text(
+                                  genre[index]['name'],
+                                  style: TextStyle(fontSize: 13),
+                                ),
                               ),
-                            ),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border.all(
-                                color:
-                                    Color(Setting_Color.setting_gray), // 枠線の色
-                                width: 1, // 枠線の幅
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(
+                                  color:
+                                      Color(Setting_Color.setting_gray), // 枠線の色
+                                  width: 1, // 枠線の幅
+                                ),
+                                borderRadius: BorderRadius.circular(8),
                               ),
-                              borderRadius: BorderRadius.circular(8),
                             ),
                           );
                         },
@@ -523,19 +565,23 @@ class _BottomSheet extends ConsumerWidget {
                                 ),
                               ),
                               onPressed: () async {
-                                final notifier =
+                                final notifier1 =
                                     ref.read(s1NotifierProvider.notifier);
-                                print(notifier.state);
-                                await notifier.updateState(s2);
-                                print(notifier.state);
-                                Navigator.pop(context, true);
+                                await notifier1.updateState(s2);
+                                final notifier3 =
+                                    ref.read(s3NotifierProvider.notifier);
+                                await notifier3.updateState(s4);
+                                final notifier5 =
+                                    ref.read(s5NotifierProvider.notifier);
+                                await notifier5.updateState(s6);
+                                Navigator.pop(context);
                               },
                             ),
                           ),
                         ),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
