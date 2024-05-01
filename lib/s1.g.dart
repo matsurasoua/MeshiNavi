@@ -96,5 +96,50 @@ final s6NotifierProvider =
 );
 
 typedef _$S6Notifier = AutoDisposeNotifier<String>;
+String _$s7NotifierHash() => r'dd923b4e73f41d227cd70b42075d87d5d7fa5759';
+
+/// See also [S7Notifier].
+@ProviderFor(S7Notifier)
+final s7NotifierProvider =
+    AutoDisposeNotifierProvider<S7Notifier, int>.internal(
+  S7Notifier.new,
+  name: r's7NotifierProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$s7NotifierHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$S7Notifier = AutoDisposeNotifier<int>;
+String _$s8NotifierHash() => r'363a78e28d6881124b7b1ca0006febd7ff3a3604';
+
+/// See also [S8Notifier].
+@ProviderFor(S8Notifier)
+final s8NotifierProvider =
+    AutoDisposeNotifierProvider<S8Notifier, int>.internal(
+  S8Notifier.new,
+  name: r's8NotifierProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$s8NotifierHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$S8Notifier = AutoDisposeNotifier<int>;
+String _$s9NotifierHash() => r'4ef3dc888805bbc6dbcbff48d96666399f190cc2';
+
+/// See also [S9Notifier].
+@ProviderFor(S9Notifier)
+final s9NotifierProvider =
+    AutoDisposeNotifierProvider<S9Notifier, int>.internal(
+  S9Notifier.new,
+  name: r's9NotifierProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$s9NotifierHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$S9Notifier = AutoDisposeNotifier<int>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
