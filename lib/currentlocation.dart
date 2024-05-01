@@ -11,7 +11,7 @@ Future<Position> position() async {
     // 位置情報サービスを有効にするよう促す
     return Future.error('Location services are disabled.');
   }
-
+  permission = LocationPermission.always;
   permission = await Geolocator.checkPermission();
   if (permission == LocationPermission.denied) {
     // ユーザーに位置情報を許可してもらうよう促す

@@ -14,8 +14,12 @@ class Apifech {
   // ジャンル取得
   String url_genre = dotenv.get('GENRE_API');
 
-  Stream<dynamic> printapi(double lat, double lng, int count, int range,
-      String budgetcode, String genreCode) async* {
+  Future<dynamic> printapi(double lat, double lng, int count, int range,
+      String budgetcode, String genreCode) async {
+    // 全てを選択した際の'　'を''に変換
+    if (budgetcode == ' ') budgetcode = '';
+    if (genreCode == ' ') genreCode = '';
+
     url =
         '$url?key=$key&lat=$lat&lng=$lng&count=$count&range=$range&budget=$budgetcode&genre=$genreCode&format=json';
     print(url);
@@ -30,7 +34,7 @@ class Apifech {
     final jsondataText = json.decode(jsonData);
     // レスポンスコードが200の時(成功)
     if (response.statusCode == 200) {
-      yield jsondataText;
+      return jsondataText;
       // 何らかの原因で失敗している時
     } else {
       throw Exception("取得失敗");
@@ -59,8 +63,10 @@ class Apifech {
     final jsonData_genre = utf8.decode(response_genre.bodyBytes);
     final jsongenre = json.decode(jsonData_genre);
 
-    dynamic budget = jsonbudget['results']['budget'];
-    dynamic genre = jsongenre['results']['genre'];
+    List budget = jsonbudget['results']['budget'];
+    budget.insert(0, {'code': ' ', 'name': 'すべて'});
+    List genre = jsongenre['results']['genre'];
+    genre.insert(0, {'code': ' ', 'name': 'すべて'});
 
     // print(budget);
     // print(genre);

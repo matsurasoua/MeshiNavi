@@ -90,3 +90,48 @@ class S6Notifier extends _$S6Notifier {
     state = value;
   }
 }
+
+// 値段の状態管理
+@riverpod
+class S7Notifier extends _$S7Notifier {
+  @override
+  int build() {
+    // 初期値
+    return 0;
+  }
+
+  // データを変更する関数
+  updateState(value) {
+    state = value;
+  }
+}
+
+// ジャンルのデータ保持
+@riverpod
+class S8Notifier extends _$S8Notifier {
+  @override
+  int build() {
+    // 初期値
+    return 0;
+  }
+
+  // データを変更する関数
+  updateState(value) {
+    state = value;
+  }
+}
+
+// ジャンルのデータ保持
+@riverpod
+class S9Notifier extends _$S9Notifier {
+  @override
+  int build() {
+    // 初期値
+    return 0;
+  }
+
+  // データを変更する関数
+  updateState(value) {
+    state = value;
+  }
+}

@@ -42,50 +42,69 @@ class _HomePageState extends State<HomePage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(Setting_Color.setting_background),
-      body: Column(
-        children: [
-          Container(
-            margin: EdgeInsets.only(top: 145),
-            child: Center(
+      backgroundColor: Color(Setting_Color.setting_brown),
+      body: Container(
+        margin: EdgeInsets.only(top: 200, bottom: 200),
+        color: Color(Setting_Color.setting_background),
+        child: Column(
+          children: [
+            Container(
+              margin: EdgeInsets.only(top: 70),
+              child: Center(
+                child: Text(
+                  'めしナビ',
+                  style: TextStyle(
+                      color: Color(Setting_Color.setting_brown),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 60),
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 100, bottom: 20),
               child: Text(
-                'めしナビ',
+                '近くの飲食店を見つけるのをサポートします！',
                 style: TextStyle(
-                    color: Color(Setting_Color.setting_brown),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 35),
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: Color(Setting_Color.setting_brown),
+                ),
               ),
             ),
-          ),
-          Container(
-            width: 220,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color(Setting_Color.setting_brown),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10) //こちらを適用
-                    ),
-              ),
-              child: const Text('検索'),
-              onPressed: () async {
-                // 緯度経度取得
-                Position currentlocation = await position();
-                double lat = currentlocation.latitude;
-                double lng = currentlocation.longitude;
+            Container(
+              width: 220,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(Setting_Color.setting_brown),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10) //こちらを適用
+                      ),
+                ),
+                child: const Text('近くのレストランを探す！'),
+                onPressed: () async {
+                  try {
+                    Position currentlocation = await position();
+                    double lat = currentlocation.latitude;
+                    double lng = currentlocation.longitude;
 
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ResultPage(
-                            lat: lat2,
-                            lng: lng2,
-                          ),
-                      fullscreenDialog: true),
-                );
-              },
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ResultPage(
+                                lat: lat2,
+                                lng: lng2,
+                              ),
+                          fullscreenDialog: true),
+                    );
+                  } catch (e) {
+                    print(e);
+                  }
+                  // 緯度経度取得
+                },
+              ),
             ),
-          )
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -24,6 +24,12 @@ class ResultPage extends ConsumerWidget {
     final s5 = ref.watch(s5NotifierProvider);
     // 状態管理(ジャンル　デフォは'')
     final s6 = ref.watch(s6NotifierProvider);
+    // 状態管理(ジャンル　デフォは'')
+    final s7 = ref.watch(s7NotifierProvider);
+    // 状態管理(ジャンル　デフォは'')
+    final s8 = ref.watch(s8NotifierProvider);
+    // 状態管理(ジャンル　デフォは'')
+    final s9 = ref.watch(s9NotifierProvider);
     print('s1:$s1');
     print('lat:$lat,lng:$lng');
     return Scaffold(
@@ -36,31 +42,9 @@ class ResultPage extends ConsumerWidget {
         ),
         iconTheme: IconThemeData(color: Colors.white),
       ),
-      // 右下のFAB
-      floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: const Color(Setting_Color.setting_brown),
-        foregroundColor: Colors.white,
-        onPressed: () async {
-          await showModalBottomSheet<bool>(
-            context: context,
-            backgroundColor: Colors.transparent,
-            isScrollControlled: true,
-            enableDrag: true,
-            barrierColor: Colors.black.withOpacity(0.5),
-            builder: (context) => _BottomSheet(),
-          );
-        },
-        icon: Icon(
-          Icons.filter_alt,
-          // size: 30,
-        ),
-        label: Text(
-          '絞り込み',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-      ),
-      body: StreamBuilder(
-          stream: Apifech().printapi(lat, lng, 10, s1, s3, s5),
+
+      body: FutureBuilder(
+          future: Apifech().printapi(lat, lng, 100, s1, s3, s5),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.waiting:
@@ -258,62 +242,105 @@ class ResultPage extends ConsumerWidget {
               );
             }
           }),
+      // 右下のFAB
+      floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: const Color(Setting_Color.setting_brown),
+        foregroundColor: Colors.white,
+        onPressed: () async {
+          final notifier2 = ref.read(s2NotifierProvider.notifier);
+          await notifier2.updateState(3);
+          final notifier4 = ref.read(s4NotifierProvider.notifier);
+          await notifier4.updateState('');
+          final notifier6 = ref.read(s6NotifierProvider.notifier);
+          await notifier6.updateState('');
+          await showModalBottomSheet<bool>(
+            context: context,
+            backgroundColor: Colors.transparent,
+            isScrollControlled: true,
+            enableDrag: false,
+            barrierColor: Colors.black.withOpacity(0.5),
+            builder: (context) => _BottomSheet(),
+          );
+        },
+        icon: Icon(
+          Icons.filter_alt,
+          // size: 30,
+        ),
+        label: Text(
+          '絞り込み',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+      ),
     );
   }
 }
 
 // FAB押した時の絞り込み画面＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
 class _BottomSheet extends ConsumerWidget {
+  List<bool> budgetState = List.filled(14, false);
+  List<bool> genreButtonStates = List.filled(18, false);
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // s2には状態管理している値が入っている
+    // 状態管理(範囲　デフォは3)
     final s1 = ref.watch(s1NotifierProvider);
-    // s2には状態管理している値が入っている
+    // 状態管理(ラジオボタン　デフォは3)
     final s2 = ref.watch(s2NotifierProvider);
-    // s3には状態管理している値が入っている
+    // 状態管理(値段　デフォは'')
     final s3 = ref.watch(s3NotifierProvider);
-    // s4には状態管理している値が入っている
+    // 状態管理(ジャンル　デフォは'')
     final s4 = ref.watch(s4NotifierProvider);
-    // s4には状態管理している値が入っている
+    // 状態管理(ジャンル　デフォは'')
     final s5 = ref.watch(s5NotifierProvider);
-    // s4には状態管理している値が入っている
+    // 状態管理(ジャンル　デフォは'')
     final s6 = ref.watch(s6NotifierProvider);
-
+    // 状態管理(ジャンル　デフォは'')
+    final s7 = ref.watch(s7NotifierProvider);
+    // 状態管理(ジャンル　デフォは'')
+    final s8 = ref.watch(s8NotifierProvider);
+    // 状態管理(ジャンル　デフォは'')
+    final s9 = ref.watch(s9NotifierProvider);
     // ラジオボタン
     final Value2 = ref.watch(s2NotifierProvider.notifier);
     // 値段
-    final Value3 = ref.watch(s3NotifierProvider.notifier);
-    // 値段
     final Value4 = ref.watch(s4NotifierProvider.notifier);
     // ジャンル
-    final Value5 = ref.watch(s5NotifierProvider.notifier);
-    // ジャンル
     final Value6 = ref.watch(s6NotifierProvider.notifier);
-    print('*********');
+    // 値段ボタンon,off　添字が入る
+    final Value8 = ref.watch(s8NotifierProvider.notifier);
+    // 値段ボタンon,off　添字が入る
+    final Value9 = ref.watch(s9NotifierProvider.notifier);
+
+    print('***********************');
     print('s1range:$s1');
     print('s2range:$s2');
     print('s3budget:$s3');
     print('s4budget:$s4');
     print('s5genre:$s5');
     print('s6genre:$s6');
-
+    // print('s7最終値i:$s7');
+    // print('s8今の値i:$s8');
+    // print('s9前の値i:$s9');
+    print('***********************');
     return FutureBuilder(
       future: Apifech().Api_list(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final infos = snapshot.data;
           // 値段情報
-          dynamic budget = infos?[0];
+          List budget = infos?[0];
+          print(budget.length);
           // ジャンル情報
-          dynamic genre = infos?[1];
+          List genre = infos?[1];
           // 金額個数
           int budget_length = budget.length;
+          // ジャンル個数
           int genre_length = genre.length;
 
           return Container(
             height: 700,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Color(Setting_Color.setting_background),
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(10),
                 topRight: Radius.circular(10),
@@ -351,28 +378,40 @@ class _BottomSheet extends ConsumerWidget {
                         children: [
                           for (int i = 0; i < budget_length; i++) ...{
                             Container(
-                              width: 130,
+                              width: 140,
                               margin: EdgeInsets.only(left: 3, right: 3),
                               child: OutlinedButton(
                                 child: Text(
                                   budget[i]['name'],
                                   style: TextStyle(
-                                    color: Color(
-                                      Setting_Color.setting_gray,
-                                    ),
-                                  ),
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                      fontSize: 13),
                                 ),
                                 style: OutlinedButton.styleFrom(
-                                  backgroundColor: Colors.white,
-                                  primary: Colors.blue,
-                                  side: const BorderSide(
+                                  padding: EdgeInsets.all(0),
+                                  backgroundColor: budgetState[i]
+                                      ? Color(
+                                          Setting_Color.setting_blue_background)
+                                      : Colors.white,
+                                  foregroundColor: Colors.blue,
+                                  side: BorderSide(
                                     color: Color(
                                       Setting_Color.setting_gray,
                                     ),
                                   ),
                                 ),
-                                onPressed: () {
-                                  Value4.state = budget[i]['code'];
+                                onPressed: () async {
+                                  //オンオフ切り替え
+                                  budgetState[i] = !budgetState[i];
+                                  // false->trueなら　新しく押した時の処理
+                                  if (budgetState[i]) {
+                                    budgetState =
+                                        List.filled(budget_length, false);
+                                    budgetState[i] = true;
+                                    Value4.state = '';
+                                    Value4.state = budget[i]['code'];
+                                  }
                                 },
                               ),
                             ),
@@ -407,7 +446,10 @@ class _BottomSheet extends ConsumerWidget {
                                 Value2.state = value!; // 状態を操作する.
                               },
                             ),
-                            Text('300m'),
+                            Text('300m',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                )),
                             Radio(
                               value: 2,
                               groupValue: s2, // 状態を表示する.
@@ -415,7 +457,10 @@ class _BottomSheet extends ConsumerWidget {
                                 Value2.state = value!; // 状態を操作する.
                               },
                             ),
-                            Text('500m'),
+                            Text('500m',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                )),
                             Radio(
                               value: 3,
                               groupValue: s2, // 状態を表示する.
@@ -423,7 +468,10 @@ class _BottomSheet extends ConsumerWidget {
                                 Value2.state = value!; // 状態を操作する.
                               },
                             ),
-                            Text('1000m'),
+                            Text('1000m',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                )),
                           ],
                         ),
                         Row(
@@ -435,14 +483,20 @@ class _BottomSheet extends ConsumerWidget {
                                 Value2.state = value!; // 状態を操作する.
                               },
                             ),
-                            Text('2000m'),
+                            Text('2000m',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                )),
                             Radio(
                                 value: 5,
                                 groupValue: s2,
                                 onChanged: (value) {
                                   Value2.state = value!;
                                 }),
-                            Text('3000m'),
+                            Text('3000m',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                )),
                           ],
                         )
                       ],
@@ -476,27 +530,34 @@ class _BottomSheet extends ConsumerWidget {
                       childAspectRatio: 3,
                       children: List.generate(
                         genre_length,
-                        (index) {
-                          return GestureDetector(
-                            onTap: () async {
-                              Value6.state = genre[index]['code'];
-                            },
-                            child: Container(
-                              child: Center(
-                                child: Text(
-                                  genre[index]['name'],
-                                  style: TextStyle(fontSize: 13),
-                                ),
+                        (i) {
+                          return Container(
+                            width: 130,
+                            child: OutlinedButton(
+                              child: Text(
+                                genre[i]['name'],
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.bold),
                               ),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border.all(
-                                  color:
-                                      Color(Setting_Color.setting_gray), // 枠線の色
-                                  width: 1, // 枠線の幅
-                                ),
-                                borderRadius: BorderRadius.circular(8),
+                              style: OutlinedButton.styleFrom(
+                                padding: EdgeInsets.all(0),
+                                backgroundColor: genreButtonStates[i]
+                                    ? Color(
+                                        Setting_Color.setting_blue_background)
+                                    : Colors.white,
+                                foregroundColor: Colors.blue,
+                                side: BorderSide(color: Colors.black),
                               ),
+                              onPressed: () {
+                                // 押したボタン以外元に戻す
+                                genreButtonStates =
+                                    List.filled(genre_length, false);
+                                //
+                                genreButtonStates[i] = !genreButtonStates[i];
+                                Value6.state = genre[i]['code'];
+                              },
                             ),
                           );
                         },
@@ -505,7 +566,7 @@ class _BottomSheet extends ConsumerWidget {
                   ),
                   // リセットボタンとokボタン
                   Container(
-                    margin: EdgeInsets.only(left: 30, right: 30, top: 40),
+                    margin: EdgeInsets.only(left: 30, right: 30, top: 15),
                     child: Stack(
                       children: <Widget>[
                         Align(
@@ -516,7 +577,7 @@ class _BottomSheet extends ConsumerWidget {
                             height: 40,
                             child: OutlinedButton(
                               child: const Text(
-                                'キャンセル',
+                                'リセット',
                                 style: TextStyle(
                                   color: Color(
                                     Setting_Color.setting_red,
@@ -533,8 +594,21 @@ class _BottomSheet extends ConsumerWidget {
                                   ),
                                 ),
                               ),
-                              onPressed: () {
-                                Navigator.pop(context);
+                              onPressed: () async {
+                                // ボタンリセット
+                                budgetState = List.filled(14, false);
+                                // ボタンリセット
+                                genreButtonStates = List.filled(18, false);
+                                final notifier2 =
+                                    ref.read(s2NotifierProvider.notifier);
+                                await notifier2.updateState(3);
+                                final notifier4 =
+                                    ref.read(s4NotifierProvider.notifier);
+                                await notifier4.updateState('');
+                                final notifier6 =
+                                    ref.read(s6NotifierProvider.notifier);
+                                await notifier6.updateState('');
+                                // Navigator.pop(context);
                               },
                             ),
                           ),
@@ -574,6 +648,10 @@ class _BottomSheet extends ConsumerWidget {
                                 final notifier5 =
                                     ref.read(s5NotifierProvider.notifier);
                                 await notifier5.updateState(s6);
+                                final notifier7 =
+                                    ref.read(s7NotifierProvider.notifier);
+                                await notifier7.updateState(s8);
+
                                 Navigator.pop(context);
                               },
                             ),
