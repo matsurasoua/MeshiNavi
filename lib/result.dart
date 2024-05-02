@@ -24,11 +24,11 @@ class ResultPage extends ConsumerWidget {
     final s5 = ref.watch(s5NotifierProvider);
     // 状態管理(ジャンル　デフォは'')
     final s6 = ref.watch(s6NotifierProvider);
-    // 状態管理(ジャンル　デフォは'')
+    // 状態管理(ジャンル　デフォは0)
     final s7 = ref.watch(s7NotifierProvider);
-    // 状態管理(ジャンル　デフォは'')
+    // 状態管理(ジャンル　デフォは0)
     final s8 = ref.watch(s8NotifierProvider);
-    // 状態管理(ジャンル　デフォは'')
+    // 状態管理(ジャンル　デフォは0)
     final s9 = ref.watch(s9NotifierProvider);
     print('s1:$s1');
     print('lat:$lat,lng:$lng');
@@ -64,7 +64,7 @@ class ResultPage extends ConsumerWidget {
               if (length == 0) {
                 return Center(
                   child: Text(
-                    '近くにレストランが無いようです',
+                    '近くに飲食店が無いようです',
                     style: TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.bold,

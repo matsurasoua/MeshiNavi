@@ -34,12 +34,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-// ECCの緯度経度
-  double lat2 = 34.706388;
-  double lng2 = 135.5010759;
-  // double lat2 = 34.3854287;
-  // double lng2 = 135.3721289;
-
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(Setting_Color.setting_brown),
@@ -91,8 +85,8 @@ class _HomePageState extends State<HomePage> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => ResultPage(
-                                lat: lat2,
-                                lng: lng2,
+                                lat: lat,
+                                lng: lng,
                               ),
                           fullscreenDialog: true),
                     );
